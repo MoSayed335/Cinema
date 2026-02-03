@@ -1,0 +1,101 @@
+﻿@model  IEnumerable<Movie>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Movies</h2>
+        <a asp-area="Admin"
+           asp-controller="Movies"
+           asp-action="Create"
+           class="btn btn-success">
+            + Add Movie
+        </a>
+    </div>
+
+    <table class="table table-bordered table-hover align-middle text-center">
+        <thead class="table-dark">
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Cinema</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="~/img/Movie/@item.MainImg"
+                             width="70" height="90"
+                             class="rounded" />
+                    </td>
+                    <td>@item.Name</td>
+                    <td>@item.Cinema?.Name</td>
+
+                    <td>@item.Category?.Name</td>
+                    <td>@item.Price EGP</td>
+                    <td>@item.DateTime.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>
+                        @if (item.Status)
+                        {
+                            <span class="badge bg-success">Active</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Inactive</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit"
+                           asp-route-id="@item.MovieId"
+                           class="btn btn-warning btn-sm">
+                            Edit
+                        </a>
+
+                        <a asp-action="Delete"
+                           asp-route-id="@item.MovieId"
+                           class="btn btn-danger btn-sm btn-delete">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".btn-delete").forEach(button => {
+            button.addEventListener("click", function (e) {
+                e.preventDefault();
+                const url = this.getAttribute("href");
+                  Swal.fire({
+                   title: "Are you sure?",
+                   text: "You won't be able to revert this!",
+                   icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Yes, delete it!"
+                  }).then((result) => {
+                 if (result.isConfirmed) {
+                    Swal.fire({
+                   title: "Deleted!",
+                   text: "Your file has been deleted.",
+                    icon: "success"
+                  });
+                  window.location.href = url;
+               }
+              });
+            });
+        });
+    });
+</script>

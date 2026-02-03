@@ -1,0 +1,77 @@
+﻿@model MoviesCreateVM
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container mt-4">
+    <h2>Add New Movie</h2>
+
+    <form asp-area="Admin"
+          asp-controller="Movies"
+          asp-action="Create"
+          method="post"
+          enctype="multipart/form-data">
+
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Movie Name</label>
+                <input asp-for="Movie.Name" class="form-control" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Price</label>
+                <input asp-for="Movie.Price" class="form-control" />
+            </div>
+
+            <div class="col-md-12 mb-3">
+                <label class="form-label">Description</label>
+                <textarea asp-for="Movie.Description"
+                          class="form-control"
+                          rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="Movie.CinemaId" class="form-label fw-semibold">Cinema Name</label>
+                <select class="form-select" id="Category" name="CinemaId">
+                    <option value="">--Select Cinema--</option>
+                    @foreach (var item in Model.Cinemas)
+                    {
+                        <option value="@item.CinemaId">@item.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Movie.CategoryId" class=" form-label fw-semibold">Category Name</label>
+                <select class="form-select" asp-for="Movie.CategoryId">
+                    <option value="">--Select Category--</option>
+                    @foreach (var item in Model.Categories)
+                    {
+                        <option value="@item.CategoryId">@item.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Date & Time</label>
+                <input asp-for="Movie.DateTime"
+                       type="datetime-local"
+                       class="form-control" />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Movie Image</label>
+                <input type="file" name="MainImg" class="form-control" />
+            </div>
+
+            <div class="col-md-12 mb-3 form-check">
+                <input asp-for="Movie.Status" class="form-check-input" />
+                <label class="form-check-label">Active</label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Back</a>
+    </form>
+</div>
