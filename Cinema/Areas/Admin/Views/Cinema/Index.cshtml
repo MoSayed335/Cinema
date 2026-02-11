@@ -1,5 +1,117 @@
 ﻿@model IEnumerable<CinemaDeteils>
 
+@section Scripts
+{
+    <partial name="_NotificationPartial.cshtml" />
+}
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="table-responsive scrollbar">
+   <div >
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Cinemas</h2>
+            <a asp-action="Create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Add Cinema
+            </a>
+        </div>
+   </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Status</th>
+                <th class="text-end" scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Location</td>
+                    <td>
+                        @if(item.Status)
+                        {
+                            <span class="badge bg-success">Active</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Inactive</span>
+
+                        }
+                    </td>
+                    <td class="text-end">
+                        @* <div>
+                            <button class="btn btn-link p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" href="~/Admin/Cinema/Edit" title="Edit"><span class="text-500 fas fa-edit"></span></button>
+                            <button class="btn btn-link p-0 ms-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><span class="text-500 fas fa-trash-alt"></span></button>
+                        </div> *@
+                        <div>
+                            <a asp-action="Edit"
+                               asp-route-id="@item.CinemaId"
+                               class="btn btn-link p-0"
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="top"
+                               title="Edit">
+                                <span class="text-500 fas fa-edit"></span>
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@item.CinemaId"
+                               class="btn btn-link p-0 ms-2 btn-delete"
+                               data-bs-toggle="tooltip"
+                               data-bs-placement="top"
+                               title="Delete"
+                               onclick="">
+                                <span class="text-500 fas fa-trash-alt"></span>
+                            </a>
+                        </div>
+
+                        @* <a asp-action="Edit" asp-route-id="@item.CinemaId" class="btn btn-sm btn-warning">
+                            Edit
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.CinemaId"
+                           class="btn btn-danger btn-delete" onclick="">
+                            Delete
+                        </a> *@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".btn-delete").forEach(button => {
+            button.addEventListener("click", function (e) {
+                e.preventDefault();
+                const url = this.getAttribute("href");
+                  Swal.fire({
+                   title: "Are you sure?",
+                   text: "You won't be able to revert this!",
+                   icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Yes, delete it!"
+                  }).then((result) => {
+                 if (result.isConfirmed) {
+                    Swal.fire({
+                   title: "Deleted!",
+                   text: "Your file has been deleted.",
+                    icon: "success"
+                  });
+                  window.location.href = url;
+               }
+              });
+            });
+        });
+    });
+</script>
+
+@* @model IEnumerable<CinemaDeteils>
+
 @{
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
@@ -78,4 +190,4 @@
             });
         });
     });
-</script>
+</script> *@

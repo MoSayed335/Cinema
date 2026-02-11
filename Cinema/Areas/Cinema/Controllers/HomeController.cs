@@ -1,30 +1,30 @@
-﻿using Cinema.DataAccess;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-namespace Cinema.Areas.Cinema.Controllers
+﻿namespace Cinema.Areas.Cinema.Controllers
 {
     [Area(SD.Role_Customer)]
     public class HomeController : Controller
     {
-        private ApplicationDBContxet _db = new();
-        public IActionResult Index()
-        {
-            var Cinemas = _db.Cinemas
-                .Select(c => new CinemaIndexVM
-                {
-                    CinemaId = c.CinemaId,
-                    Name = c.Name,
-                    Image = c.Image
-                }).ToList();
+        //private ApplicationDBContxet _db = new();
+        private IRepository<CinemaDeteils> _CinemaRepository;
+        private IRepository<Movie> _MovieRepository;
 
+        public HomeController(IRepository<CinemaDeteils> cinemaRepository, IRepository<Movie> movieRepository)
+        {
+            _CinemaRepository = cinemaRepository;
+            _MovieRepository = movieRepository;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+      
+            var Cinemas = await _CinemaRepository.GetAllasync();
             return View(Cinemas);
         }
-            public IActionResult Details(int id)
+            public async Task<IActionResult> Details(int id)
         {
-            var cinema = _db.Cinemas
-                .Include(c => c.Movies)
-                .FirstOrDefault(c => c.CinemaId == id);
+            //var cinema = _db.Cinemas
+            //    .Include(c => c.Movies)
+            //    .FirstOrDefault(c => c.CinemaId == id);
+            var cinema = await _CinemaRepository.GetoneAsync(includes: [c => c.Movies], expression: c => c.CinemaId == id);
 
             if (cinema == null) return NotFound();
 

@@ -5,7 +5,16 @@ namespace Cinema
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            builder.Services.AddDbContext<ApplicationDBContxet>(
+                options =>
+                {
+                    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                }
+                );
+            builder.Services.AddScoped<IRepository<CinemaDeteils>, Repository<CinemaDeteils>>();
+            builder.Services.AddScoped<IRepository<Movie>, Repository<Movie>>();
+            builder.Services.AddScoped<IRepository<Category>, Repository<Category>>();
+            builder.Services.AddScoped<IRepository<Actor>, Repository<Actor>>();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
@@ -27,7 +36,7 @@ namespace Cinema
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{area=Admin}/{controller=Cinema}/{action=Index}/{id?}")
+                pattern: "{area=Admin}/{controller=Home}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();
