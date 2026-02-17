@@ -16,6 +16,5 @@
         public CinemaDeteils Cinema { get; set; }
         public Category Category { get; set; }
         public List<MovieActor> MovieActors { get; set; }
-        public List<Ticket> Tickets { get; set; }
     }
 }

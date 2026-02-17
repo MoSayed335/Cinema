@@ -1,0 +1,55 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\pro\\Cinema\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E658791B-B937-4CC2-8E1D-2D8A684C12BA}|Cinema\\Cinema.csproj|d:\\pro\\cinema\\cinema\\areas\\identity\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E658791B-B937-4CC2-8E1D-2D8A684C12BA}|Cinema\\Cinema.csproj|solutionrelative:cinema\\areas\\identity\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 149,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\pro\\Cinema\\Cinema\\Areas\\Identity\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Cinema\\Areas\\Identity\\Controllers\\AccountController.cs",
+              "ToolTip": "D:\\pro\\Cinema\\Cinema\\Areas\\Identity\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Cinema\\Areas\\Identity\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAALkAAADA/f////8bwPgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-17T02:16:31.802Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedHeight": 251,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

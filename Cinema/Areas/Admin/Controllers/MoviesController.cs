@@ -92,7 +92,7 @@ namespace Cinema.Areas.Admin.Controllers
             //}
             //_db.Movies.Add(movie);
             //_db.SaveChanges();
-            TempData["success"] = "Movie created successfully";
+            TempData["Success"] = "Movie created successfully";
 
             await _MovieRepository.CreateAsync(Move);
             await _MovieRepository.CommitAsync();
@@ -150,7 +150,7 @@ namespace Cinema.Areas.Admin.Controllers
             movieFromDb.CategoryId = movie.CategoryId;
             movieFromDb.DateTime = movie.DateTime;
             movieFromDb.Status = movie.Status;
-            TempData["success"] = "Movie Edit successfully";
+            TempData["Success"] = "Movie Edit successfully";
 
             _MovieRepository.ubdate(movie);
             await _MovieRepository.CommitAsync();
@@ -172,7 +172,7 @@ namespace Cinema.Areas.Admin.Controllers
 
             //_db.Movies.Remove(movieFromDb);
             //_db.SaveChanges();
-            TempData["success"] = "Movie Delete successfully";
+            TempData["Success"] = "Movie Delete successfully";
 
             _MovieRepository.Delete(movieFromDb);
             await _MovieRepository.CommitAsync();

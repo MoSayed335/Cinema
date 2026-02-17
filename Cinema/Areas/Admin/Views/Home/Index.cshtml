@@ -1,4 +1,9 @@
-﻿<div class="row g-3 mb-3">
+﻿@section Scripts
+{
+    <partial name="_NotificationPartial" />
+}
+
+<div class="row g-3 mb-3">
     <div class="col-xxl-6 col-xl-12">
         <div class="row g-3">
             <div class="col-12">
@@ -9,10 +14,20 @@
                         /.bg-holder
 
                         <div class="position-relative z-2">
-                            <div>
-                                <h3 class="text-primary mb-1">Good Afternoon, Jonathan!</h3>
-                                <p>Here’s what happening with your store today </p>
-                            </div>
+                            @if(User.Identity.IsAuthenticated)
+                            {
+                                <div>
+                                    <h3 class="text-primary mb-1">Good Afternoon, @User.Identity.Name!</h3>
+                                    <p>Here’s what happening with your store today </p>
+                                </div>
+                            }
+                            else
+                            {
+                                <div>
+                                    <h3 class="text-primary mb-1">Good Afternoon, Wellcome My Store!</h3>
+                                    <p>Here’s what happening with your store today </p>
+                                </div>
+                            }
                             <div class="d-flex py-3">
                                 <div class="pe-3">
                                     <p class="text-600 fs-10 fw-medium">Today's visit </p>

@@ -1,9 +1,4 @@
-﻿using Cinema.DataAccess;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-
-namespace Cinema.Areas.Cinema.Controllers
+﻿namespace Cinema.Areas.Cinema.Controllers
 {
     [Area(SD.Role_Customer)]
     public class MovieController : Controller

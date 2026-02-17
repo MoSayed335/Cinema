@@ -10,6 +10,5 @@
         public string Location { get; set; }
         public bool Status { get; set; }
         public List<Movie> Movies { get; set; }
-        public List<Seat> Seats { get; set; }
     }
 }
