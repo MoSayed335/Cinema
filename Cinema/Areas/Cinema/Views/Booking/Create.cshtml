@@ -1,0 +1,89 @@
+﻿
+@model BookingVM
+
+@{
+    ViewData["Title"] = "Book a Movie";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow border-0">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h3 class="mb-0"><i class="bi bi-film"></i> Book Your Tickets</h3>
+                </div>
+                <div class="card-body p-4">
+
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            @TempData["Error"]
+                        </div>
+                    }
+
+                    <form asp-action="Create" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <div class="mb-3">
+                            <label asp-for="MovieId" class="form-label fw-semibold">Movie Name</label>
+
+                            @* لاحظ استخدام asp-for لربطها بـ MovieId واستخدام asp-items لعرض القائمة *@
+                            <select class="form-select" id="Movie" name="MovieId">
+                                <option value="">--Select Movie--</option>
+                                @foreach (var item in Model.Movies)
+                                {
+                                    @* تأكد هل الخاصية هي item.Value أم item.id (حسب نوع SelectListItem) *@
+                                    <option value="@item.MovieId">@item.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="MovieId" class="text-danger small"></span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="SeatType" class="form-label fw-bold">Seat Category</label>
+                                <select asp-for="SeatType" asp-items="Html.GetEnumSelectList<Cinema.Models.SeatType>()" class="form-select">
+                                </select>
+                                <div class="form-text text-muted small">VIP: $150 | Regular: $100</div>
+                                <span asp-validation-for="SeatType" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="NumbetOFTikets" class="form-label fw-bold">Tickets Quantity</label>
+                                <input asp-for="NumbetOFTikets" class="form-control" type="number" min="1" max="10" placeholder="Max 10" />
+                                <span asp-validation-for="NumbetOFTikets" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="ShowTime" class="form-label fw-bold">Show Date & Time</label>
+                            <input asp-for="ShowTime" class="form-control" type="datetime-local" />
+                            <span asp-validation-for="ShowTime" class="text-danger small"></span>
+                        </div>
+
+                        <hr />
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                                <i class="bi bi-check-circle"></i> Confirm Booking
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary">
+                                Back to My Bookings
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center mt-3 text-muted">
+                <small><i class="bi bi-info-circle"></i> Prices are calculated automatically based on seat type.</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <partial name="_NotificationPartial" />
+    }
+}

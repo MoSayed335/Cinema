@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Booking>
+@{
+    Layout = "~/Areas/Cinema/Views/Shared/_LayoutCinema.cshtml";
+    }
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary"><i class="bi bi-ticket-perforated"></i> My Bookings</h2>
+        <a asp-action="Create" class="btn btn-success">Book New Movie</a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Movie Title</th>
+                            <th>Show Time</th>
+                            <th>Seat Type</th>
+                            <th>Tickets</th>
+                            <th>Total Price</th>
+                            <th>Booking Date</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="fw-bold text-dark">
+                                        @item.Movie.Name</td>
+                                    <td>
+                                        <span class="text-muted"><i class="bi bi-clock"></i> @item.ShowTime.ToString("dd MMM yyyy, hh:mm tt")</span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-info text-dark">@item.SeatType</span>
+                                    </td>
+                                    <td class="text-center">@item.NumbetOFTikets</td>
+                                    <td class="fw-bold text-success">
+                                        $@item.TotalPrice.ToString("N2")
+                                    </td>
+                                    <td class="small text-muted">
+                                        @item.BookingDate.ToShortDateString()
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group">
+                                            <a asp-action="Detalis" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Detalis</a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Cancel</a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center py-5">
+                                    <p class="text-muted">You have no bookings yet.</p>
+                                    <a asp-action="Create" class="btn btn-primary btn-sm">Start Booking</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <Partial name="_NotificationPartial" />    
+}

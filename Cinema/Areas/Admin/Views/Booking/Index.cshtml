@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Cinema.Models.Booking>
+
+@{
+    ViewData["Title"] = "Bookings Management";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Bookings Management</h2>
+
+    <table class="table table-bordered table-striped table-hover shadow">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>User</th>
+                <th>Movie</th>
+                <th>Seats</th>
+                <th>Total Price</th>
+                <th>Booking Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.User?.UserName</td>
+                    <td>@item.Movie?.Name</td>
+                    <td>@item.SeatType</td>
+                    <td>@item.TotalPrice.ToString("C")</td>
+                    <td>@item.BookingDate.ToString("yyyy-MM-dd")</td>
+                    @* <td>
+                        @if (item. == "Confirmed")
+                        {
+                            <span class="badge bg-success">Confirmed</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Cancelled</span>
+                        }
+                    </td> *@
+                    <td>
+                        <a asp-action="Delete"
+                           asp-route-id="@item.Id"
+                           class="btn btn-sm btn-danger">
+                            Cancel
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

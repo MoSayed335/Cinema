@@ -1,0 +1,78 @@
+﻿@model List<CinemaDeteils>
+@section Scripts{
+    <partial name="_NotificationPartial" />
+}
+<div class="container py-5">
+    <!-- Greeting / Title -->
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h2 class="text-center text-light mb-4">Good Afternoon, @User.Identity.Name!🎬</h2>
+    }
+    else
+    {
+        <h2 class="text-center text-light mb-4">🎬 Our Cinemas</h2>
+
+    }
+ <div class="row g-4">
+        <!-- Cinema Card Example 1 -->
+        @foreach(var item in Model)
+        {
+            
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <a href="/Cinema/Home/Details/@item.CinemaId" class="text-decoration-none">
+                <div class="card bg-dark text-white border-0 shadow-lg overflow-hidden cinema-card">
+                    <img src="~/img/Cinema/@item.Image"
+                         class="card-img-top"
+                         alt="Cinema 1"
+                         style="height: 220px; object-fit: cover;">
+                    <div class="card-body text-center py-4">
+                        <h5 class="card-title mb-0" style="color: #ffc107;">@item.Name</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        }
+
+
+        <!-- Add more cards here as needed -->
+    </div>
+</div>
+
+<!-- Optional hover effects -->
+<style>
+    .cinema-card {
+        border-radius: 10px;
+        transition: all 0.3s ease;
+    }
+
+        .cinema-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6) !important;
+        }
+
+        .cinema-card img {
+            transition: transform 0.4s ease;
+        }
+
+        .cinema-card:hover img {
+            transform: scale(1.05);
+        }
+</style>
+
+<!-- Optional: Dynamic greeting (if you want to show username when logged in) -->
+<script>
+    // You can set these variables from your backend (e.g., via data attributes or hidden input)
+    const isLoggedIn = false;           // replace with real check
+    var userName   = @User.Identity.Name ;       // replace with real username
+
+    if (isLoggedIn && userName) {
+        const hour = new Date().getHours();
+        let greeting = "Hello";
+        if (hour >= 5  && hour < 12) greeting = "Good Morning";
+        if (hour >= 12 && hour < 17) greeting = "Good Afternoon";
+        if (hour >= 17 && hour < 21) greeting = "Good Evening";
+        if (hour >= 21 || hour < 5)  greeting = "Good Night";
+
+        document.querySelector('h2').innerHTML = `🎬 ${greeting}, ${userName}!`;
+    }
+</script>

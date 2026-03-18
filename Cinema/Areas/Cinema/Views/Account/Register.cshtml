@@ -1,0 +1,75 @@
+﻿@model Cinema.ViewModel.RegisterVM
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Areas/Cinema/Views/Shared/_LayoutCinema.cshtml";
+}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+            <div class="card border-0 shadow-lg p-4" style="background-color: #1e1e1e; border-radius: 12px;">
+                <h1 class="text-center mb-4" style="color: #ffc107;">Register</h1>
+                <hr class="border-secondary">
+
+                <form asp-action="Register" method="post" class="needs-validation" novalidate>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FName" class="form-label text-light">First Name</label>
+                            <input asp-for="FName" class="form-control bg-dark text-light border-secondary" required />
+                            <div class="invalid-feedback text-warning">Required</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="LName" class="form-label text-light">Last Name</label>
+                            <input asp-for="LName" class="form-control bg-dark text-light border-secondary" required />
+                            <div class="invalid-feedback text-warning">Required</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="UserName" class="form-label text-light">Username</label>
+                        <input asp-for="UserName" class="form-control bg-dark text-light border-secondary" required />
+                        <div class="invalid-feedback text-warning">Required</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label text-light">Email</label>
+                        <input asp-for="Email" class="form-control bg-dark text-light border-secondary" type="email" required />
+                        <div class="invalid-feedback text-warning">Please enter a valid email</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label text-light">Password</label>
+                        <input asp-for="Password" class="form-control bg-dark text-light border-secondary" type="password" required minlength="6" />
+                        <div class="invalid-feedback text-warning">Password is required (minimum 6 characters)</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ConfirmPassword" class="form-label text-light">Confirm Password</label>
+                        <input asp-for="ConfirmPassword" class="form-control bg-dark text-light border-secondary" type="password" required />
+                        <div class="invalid-feedback text-warning">Passwords do not match</div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Address" class="form-label text-light">Address</label>
+                        <input asp-for="Address" class="form-control bg-dark text-light border-secondary" />
+                    </div>
+
+                    <button type="submit" class="btn btn-warning w-100 py-2 fw-bold" style="background-color: #ffc107; border: none; color: #121212;">
+                        Create Account
+                    </button>
+
+                    <div class="text-center mt-4">
+                        <a asp-action="Login" class="text-warning text-decoration-none">
+                            Already have an account? Sign In →
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_NotificationPartial" />
+}

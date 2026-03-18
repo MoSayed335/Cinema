@@ -1,0 +1,32 @@
+﻿@model List<UserWithRoleVM>
+
+<h2>All Users</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>UserName</th>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.Email</td>
+                <td>
+                    @if (user.Role is not null)
+                    {
+                        <span class="badge bg-danger">@user.Role</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-primary">@user.Role</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

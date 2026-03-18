@@ -1,0 +1,62 @@
+﻿@model Cinema.ViewModel.LoginVM
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Areas/Cinema/Views/Shared/_LayoutCinema.cshtml";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card border-0 shadow-lg p-4" style="background-color: #1e1e1e; border-radius: 12px;">
+                <h1 class="text-center mb-4" style="color: #ffc107;">Login</h1>
+                <hr class="border-secondary">
+
+                <form asp-action="Login" method="post" class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label asp-for="EmailOrUserName" class="form-label text-light">Email or Username</label>
+                        <input asp-for="EmailOrUserName" class="form-control bg-dark text-light border-secondary" required autofocus />
+                        <div class="invalid-feedback text-warning">
+                            Please enter your email or username
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label text-light">Password</label>
+                        <input asp-for="Password" class="form-control bg-dark text-light border-secondary" type="password" required />
+                        <div class="invalid-feedback text-warning">
+                            Please enter your password
+                        </div>
+                    </div>
+
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" asp-for="RememberMy" id="RememberMy" />
+                        <label class="form-check-label text-light" for="RememberMy">
+                            Remember me
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-warning w-100 py-2 fw-bold" style="background-color: #ffc107; border: none; color: #121212;">
+                        Sign In
+                    </button>
+                    
+
+                    <div class="text-center mt-4">
+                        <a asp-action="Register" class="text-warning text-decoration-none">
+                            Don't have an account? Register →
+                        </a>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="/Identity/Account/Login" class="text-warning text-decoration-none">
+                            I'm Admin
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_NotificationPartial" />
+}

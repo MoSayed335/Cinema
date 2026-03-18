@@ -1,0 +1,28 @@
+﻿@model List<CinemaDeteils>
+
+<div class="container py-5">
+    <h2 class="text-center text-light mb-4">Manegment Cinema</h2>
+
+    <div class="row g-4">
+        @foreach (var cinema in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <a asp-area="Adnin"
+                   asp-controller="Home"
+                   asp-action="Edit"
+                   asp-route-id="@cinema.CinemaId"
+                   class="cinema-card">
+
+                    <div class="card bg-dark text-white border-0 shadow-lg">
+                        <img src="~/img/Cinema/@cinema.Image"
+                             class="card-img-top cinema-img" />
+
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@cinema.Name</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>

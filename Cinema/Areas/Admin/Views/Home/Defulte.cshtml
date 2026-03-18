@@ -1,0 +1,97 @@
+﻿@model DashboardVM
+<div class="container-fluid mt-4">
+
+    <!-- Page Title -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">🎬 Cinema Admin Dashboard</h2>
+        <span class="text-muted">Welcome Back, Admin</span>
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="row g-4">
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Movies</h6>
+                    <h3 class="fw-bold">@Model.TotalMovies</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Cinemas</h6>
+                    <h3 class="fw-bold">@Model.TotalCinemas</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Bookind</h6>
+                    <h3 class="fw-bold">@Model.TotalBookings</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Revenue</h6>
+                    <h3 class="fw-bold text-success">$12,500</h3>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Second Row -->
+    <div class="row mt-5">
+
+        <!-- Most Booked Movie -->
+        <div class="col-md-4">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3">🔥 Most Booked Movie</h5>
+                    <p class="mb-1"><strong>Movie Name:</strong> Secoseco</p>
+                    <p class="mb-1"><strong>Total Bookings:</strong> 4</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Shows -->
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3">📅 Upcoming Shows</h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Movie</th>
+                                    <th>Cinema</th>
+                                    <th>Date Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Movies)
+                                {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.Cinema.Name</td>
+                                    <td>@item.DateTime</td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,24 @@
+﻿@model Actor
+
+<div class="container mt-4">
+    <h2>Add New Actor</h2>
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data"
+          class="shadow p-4 rounded bg-light">
+
+        <div class="mb-3">
+            <label class="form-label">Actor Name</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Actor Image</label>
+            <input type="file" name="Image" class="form-control" />
+        </div>
+
+        <button class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Back</a>
+
+    </form>
+</div>

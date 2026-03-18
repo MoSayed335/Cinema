@@ -1,0 +1,56 @@
+﻿@model ActorVM
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between mb-3">
+        <h2>Actors Management</h2>
+        <a asp-action="Create" class="btn btn-success">+ Add Actor</a>
+    </div>
+
+    <table class="table table-bordered table-hover shadow">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Movies Count</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var actor in Model.Actors)
+            {
+                <tr>
+                    <td>@actor.ActorId</td>
+
+                    <td>
+                        <img src="~/img/Actors/@actor.Image"
+                             width="60"
+                             class="rounded-circle" />
+                    </td>
+
+                    <td>@actor.Name</td>
+
+                    <td>
+                        @(actor.MovieActors?.Count ?? 1)
+                    </td>
+
+                    <td class="text-center">
+                        <a asp-action="Edit"
+                           asp-route-id="@actor.ActorId"
+                           class="btn btn-sm btn-warning">
+                            Edit
+                        </a>
+
+                        <a asp-action="Delete"
+                           asp-route-id="@actor.ActorId"
+                           class="btn btn-sm btn-danger">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
